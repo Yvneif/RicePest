@@ -1,0 +1,19 @@
+{
+  "version": "mobilenetv3-small-compact",
+  "arch": "mobilenet_v3",
+  "input_size": 224,
+  "labels": [
+    "Green Leafhopper",
+    "Leaf Folders",
+    "Rice Bug",
+    "Stem Borer"
+  ],
+  "threshold": 0.55,
+  "description": "MobileNetV3-Small transfer learning, 4 classes, val_acc=0.968",
+  "class_names_raw": [
+    "GREEN LEAFHOPPER",
+    "LEAF FOLDERS",
+    "RICE BUG",
+    "STEM BORER"
+  ]
+}
