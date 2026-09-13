@@ -1,0 +1,8 @@
+{
+  "version": "legacy-resnet50-model6",
+  "arch": "resnet50",
+  "input_size": 180,
+  "labels": ["Green Leafhopper", "Leaf Folders", "Unrecognized", "Rice Bug", "Stem Borer"],
+  "threshold": null,
+  "description": "ResNet50 transfer-learning classifier trained in RICEPESTseq.ipynb (my_trained_model6.keras, 180x180 input)."
+}
