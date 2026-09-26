@@ -2,16 +2,17 @@
 
 from __future__ import annotations
 
-from flask import request, session
+from flask import current_app, request, session
 from sqlalchemy import select
 
 from app.admin.guards import get_current_user
-from app.extensions import db
+from app.extensions import db, limiter
 from app.models import User
 
 
 def register_auth_routes(auth_bp) -> None:  # noqa: ANN001
     @auth_bp.post("/login")
+    @limiter.limit(lambda: current_app.config["RATE_LIMIT_LOGIN"])
     def login():  # noqa: ANN202
         data = request.get_json(silent=True) or {}
         username = (data.get("username") or "").strip()

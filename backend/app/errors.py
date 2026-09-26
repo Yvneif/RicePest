@@ -77,6 +77,10 @@ def register_security_headers(app: Flask) -> None:
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
         response.headers.setdefault("X-Frame-Options", "DENY")
         response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+        if request.path.startswith("/api/"):
+            # API responses carry auth/session state and scan data; never allow
+            # shared or browser caches to store them.
+            response.headers.setdefault("Cache-Control", "no-store")
         if app.config.get("CSP_ENABLED") and not request.path.startswith("/api/"):
             response.headers.setdefault("Content-Security-Policy", DEFAULT_CSP)
         return response

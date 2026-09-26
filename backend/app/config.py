@@ -52,6 +52,11 @@ class Config:
 
     RATE_LIMIT_DEFAULT = os.environ.get("RATE_LIMIT_DEFAULT", "240/hour")
     RATE_LIMIT_PREDICT = os.environ.get("RATE_LIMIT_PREDICT", "30/hour")
+    RATE_LIMIT_LOGIN = os.environ.get("RATE_LIMIT_LOGIN", "10/minute")
+
+    # Flask-Limiter reads ``RATELIMIT_DEFAULT`` from the Flask app config on
+    # init_app; keep it in sync with ``RATE_LIMIT_DEFAULT``.
+    RATELIMIT_DEFAULT = RATE_LIMIT_DEFAULT
 
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
@@ -68,6 +73,13 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     ENV_NAME = "production"
+
+    # HTTPS is expected in production (see docs/DEPLOYMENT.md checklist), so
+    # cookies are Secure unless explicitly disabled for local plain-HTTP runs.
+    raw_cookie_secure = os.environ.get("COOKIE_SECURE")
+    SESSION_COOKIE_SECURE = (
+        raw_cookie_secure.lower() == "true" if raw_cookie_secure is not None else True
+    )
 
     @staticmethod
     def validate() -> None:

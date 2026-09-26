@@ -5,12 +5,16 @@ from __future__ import annotations
 import io
 import re
 import uuid
+import warnings
 from pathlib import Path
 
 from PIL import Image, UnidentifiedImageError
 from werkzeug.datastructures import FileStorage
 
 MAX_SIDE = 1600
+MAX_IMAGE_PIXELS = 10_000_000
+ALLOWED_IMAGE_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}
+ALLOWED_IMAGE_FORMATS = {"JPEG", "PNG", "WEBP"}
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
 _DEVICE_RE = re.compile(r"[^A-Za-z0-9_-]")
 
@@ -43,17 +47,36 @@ def save_image(file: FileStorage, folder: Path) -> str:
     """
     filename = file.filename or ""
     ext = filename.rsplit(".", 1)[-1].lower() if "." in filename else ""
-    if ext not in {"jpg", "jpeg", "png", "webp"}:
+    if ext not in ALLOWED_IMAGE_EXTENSIONS:
         raise UploadError("unsupported_format", "Only JPG, PNG, or WebP images are allowed.")
     raw = file.read()
     if not raw:
         raise UploadError("invalid_image", "The uploaded file is empty.")
 
     try:
-        probe = Image.open(io.BytesIO(raw))
-        probe.verify()
-        img = Image.open(io.BytesIO(raw)).convert("RGB")
-    except (UnidentifiedImageError, OSError, Image.DecompressionBombError):
+        with warnings.catch_warnings():
+            warnings.simplefilter("error", Image.DecompressionBombWarning)
+            with Image.open(io.BytesIO(raw)) as probe:
+                probe_format = (probe.format or "").upper()
+                if probe_format not in ALLOWED_IMAGE_FORMATS:
+                    raise UploadError(
+                        "unsupported_format", "Only JPG, PNG, or WebP images are allowed."
+                    )
+                w, h = probe.size
+                if MAX_IMAGE_PIXELS and (w * h > MAX_IMAGE_PIXELS):
+                    raise Image.DecompressionBombError("Image dimensions exceed safety limit.")
+                probe.verify()
+
+            with Image.open(io.BytesIO(raw)) as source:
+                img = source.convert("RGB")
+    except UploadError:
+        raise
+    except (
+        UnidentifiedImageError,
+        OSError,
+        Image.DecompressionBombError,
+        Image.DecompressionBombWarning,
+    ):
         raise UploadError("invalid_image", "That file is not a valid image.") from None
 
     if max(img.size) > MAX_SIDE:
