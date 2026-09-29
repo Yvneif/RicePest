@@ -3,6 +3,7 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { BottomNav } from "./components/layout/BottomNav";
+import { DesktopNav } from "./components/layout/DesktopNav";
 import { AdminLoginPage } from "./pages/admin/Shared";
 
 const HomePage = lazy(() => import("./pages/HomePage").then((m) => ({ default: m.HomePage })));
@@ -57,6 +58,7 @@ export default function App() {
 
   return (
     <>
+      {!isAdmin && PUBLIC_PATHS.has(location.pathname) && <DesktopNav />}
       <Suspense fallback={<RouteFallback />}>
         <AnimatePresence mode="wait" initial={false}>
           <Routes location={location} key={location.pathname}>

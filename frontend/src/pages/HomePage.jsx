@@ -36,11 +36,11 @@ export function HomePage() {
   }, [online]);
 
   return (
-    <div className="mx-auto max-w-md px-4 pb-32">
+    <div className="mx-auto w-full max-w-md px-4 pb-32 lg:max-w-6xl lg:px-8 lg:pb-12">
       <Stagger>
         <motion.section
           variants={staggerItem}
-          className="relative mt-4 overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-800 via-brand-700 to-brand-600 px-6 pb-8 pt-10 text-white shadow-lift"
+          className="relative mt-4 overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-800 via-brand-700 to-brand-600 px-6 pb-8 pt-10 text-white shadow-lift lg:px-10 lg:pb-12 lg:pt-14"
         >
           <svg
             className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 opacity-15"
@@ -52,7 +52,7 @@ export function HomePage() {
           <Chip className="bg-white/15 text-brand-50">
             <Sparkles className="h-3 w-3" /> AI rice pest identification
           </Chip>
-          <h1 className="mt-3 font-display text-3xl font-bold leading-tight">
+          <h1 className="mt-3 font-display text-3xl font-bold leading-tight lg:text-4xl">
             Protect your palay,
             <br />
             scan the pest.
@@ -73,7 +73,7 @@ export function HomePage() {
           <motion.div variants={staggerItem} className="mt-4">
             <Card className="flex items-center gap-3 p-4">
               <WifiOff className="h-5 w-5 shrink-0 text-gold-600" />
-              <p className="text-sm text-stone-600 dark:text-stone-300">
+              <p className="text-sm text-stone-600">
                 You are offline. Scans you take are saved and synced automatically.
                 {pending > 0 && ` ${pending} scan${pending > 1 ? "s" : ""} waiting.`}
               </p>
@@ -85,16 +85,16 @@ export function HomePage() {
           <InstallPrompt />
         </motion.div>
 
-        <motion.div variants={staggerItem} className="mt-4 grid gap-3">
+        <motion.div variants={staggerItem} className="mt-4 grid gap-3 sm:grid-cols-3">
           {FEATURES.map(({ icon: Icon, title, text, to }) => (
             <Link key={to} to={to} className="btn-press block">
               <Card className="flex items-center gap-4 p-4 hover:shadow-lift">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-100 text-brand-700 dark:bg-brand-600/20 dark:text-brand-300">
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-100 text-brand-700">
                   <Icon className="h-6 w-6" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-display font-bold">{title}</p>
-                  <p className="text-sm text-stone-500 dark:text-stone-400">{text}</p>
+                  <p className="text-sm text-stone-500">{text}</p>
                 </div>
               </Card>
             </Link>
@@ -103,7 +103,7 @@ export function HomePage() {
 
         <motion.p
           variants={staggerItem}
-          className="mt-6 flex items-center justify-center gap-1.5 text-center text-xs text-stone-400 dark:text-stone-500"
+          className="mt-6 flex items-center justify-center gap-1.5 text-center text-xs text-stone-400"
         >
           <ShieldCheck className="h-3.5 w-3.5" />
           Photos stay on your device unless you identify them

@@ -61,13 +61,13 @@ export function HistoryPage() {
   }
 
   return (
-    <div className="pb-32">
+    <div className="pb-32 lg:pb-10">
       <TopBar title="Scan History" />
-      <div className="mx-auto max-w-md px-4">
+      <div className="mx-auto w-full max-w-md px-4 lg:max-w-4xl lg:px-8">
         {pending > 0 && (
           <Card className="mt-4 flex items-center gap-3 p-4">
             <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-gold-500" />
-            <p className="text-sm text-stone-600 dark:text-stone-300">
+            <p className="text-sm text-stone-600">
               {pending} offline scan{pending > 1 ? "s" : ""} waiting to sync.
             </p>
           </Card>
@@ -110,7 +110,7 @@ export function HistoryPage() {
               <h3 className="mb-2 px-1 text-xs font-bold uppercase tracking-wide text-stone-400">
                 {group.day}
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-3 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">
                 {group.scans.map((scan) => (
                   <Card key={scan.id} className="flex items-center gap-4 p-3">
                     <img

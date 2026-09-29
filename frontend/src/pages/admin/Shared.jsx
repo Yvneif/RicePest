@@ -17,11 +17,11 @@ export function AdminLayout({ title, children }) {
 
   return (
     <div className="min-h-dvh">
-      <header className="glass sticky top-0 z-30 pt-safe dark:bg-ink/70">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3">
+      <header className="glass sticky top-0 z-30 pt-safe">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3 lg:max-w-6xl">
           <Link
             to="/"
-            className="btn-press -ml-1 rounded-full p-2 hover:bg-stone-200/60 dark:hover:bg-white/10"
+            className="btn-press -ml-1 rounded-full p-2 hover:bg-stone-200/60"
             aria-label="Back to app"
           >
             <ArrowLeft className="h-4.5 w-4.5" />
@@ -38,13 +38,13 @@ export function AdminLayout({ title, children }) {
               await logout();
               navigate("/admin/login");
             }}
-            className="btn-press ml-auto rounded-xl p-2.5 text-stone-500 hover:bg-stone-200/60 dark:text-stone-400 dark:hover:bg-white/10"
+            className="btn-press ml-auto rounded-xl p-2.5 text-stone-500 hover:bg-stone-200/60"
             aria-label="Log out"
           >
             <LogOut className="h-4.5 w-4.5" />
           </button>
         </div>
-        <nav className="mx-auto flex max-w-3xl gap-1 px-4 pb-2">
+        <nav className="mx-auto flex max-w-3xl gap-1 px-4 pb-2 lg:max-w-6xl">
           {TABS.map(({ to, label, icon: Icon, end }) => (
             <NavLink
               key={to}
@@ -54,7 +54,7 @@ export function AdminLayout({ title, children }) {
                 `flex flex-1 items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-sm font-semibold ${
                   isActive
                     ? "bg-brand-700 text-white shadow-soft"
-                    : "text-stone-500 hover:bg-stone-200/60 dark:text-stone-400 dark:hover:bg-white/10"
+                    : "text-stone-500 hover:bg-stone-200/60"
                 }`
               }
             >
@@ -64,7 +64,7 @@ export function AdminLayout({ title, children }) {
           ))}
         </nav>
       </header>
-      <main className="mx-auto max-w-3xl px-4 py-6">{children}</main>
+      <main className="mx-auto max-w-3xl px-4 py-6 lg:max-w-6xl lg:px-8">{children}</main>
     </div>
   );
 }
@@ -100,13 +100,13 @@ export function AdminLoginPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-sm rounded-[2rem] bg-white p-7 shadow-lift dark:bg-stone-900 dark:ring-1 dark:ring-white/10"
+        className="w-full max-w-sm rounded-[2rem] bg-white p-7 shadow-lift"
       >
         <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-700 text-white">
           <Leaf className="h-6 w-6" />
         </span>
         <h1 className="mt-4 text-center font-display text-xl font-bold">Admin sign in</h1>
-        <p className="mt-1 text-center text-sm text-stone-500 dark:text-stone-400">
+        <p className="mt-1 text-center text-sm text-stone-500">
           Rice Pest Identifier dashboard
         </p>
         <form onSubmit={submit} className="mt-5 space-y-3">
@@ -115,7 +115,7 @@ export function AdminLoginPage() {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
             autoComplete="username"
-            className="w-full rounded-xl border border-stone-200 bg-transparent px-4 py-3 text-sm outline-none focus:border-brand-600 dark:border-white/15 dark:focus:border-brand-400"
+            className="w-full rounded-xl border border-stone-200 bg-transparent px-4 py-3 text-sm outline-none focus:border-brand-600"
           />
           <input
             type="password"
@@ -123,7 +123,7 @@ export function AdminLoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             autoComplete="current-password"
-            className="w-full rounded-xl border border-stone-200 bg-transparent px-4 py-3 text-sm outline-none focus:border-brand-600 dark:border-white/15 dark:focus:border-brand-400"
+            className="w-full rounded-xl border border-stone-200 bg-transparent px-4 py-3 text-sm outline-none focus:border-brand-600"
           />
           {error && <p className="text-sm text-red-500">{error}</p>}
           <button

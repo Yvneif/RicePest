@@ -1,29 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { WifiOff, Download, Moon, Sun, Leaf } from "lucide-react";
+import { WifiOff, Download, Leaf } from "lucide-react";
 import { useOnline } from "../../hooks/useOnline";
-import { getStoredTheme, applyTheme } from "../../lib/device";
 
-/** Top bar with brand, theme toggle, offline indicator. */
+/** Top bar with brand and offline indicator; phones only — desktop uses DesktopNav. */
 export function TopBar({ title = "Rice Pest Identifier", backTo = null }) {
   const online = useOnline();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(getStoredTheme());
-
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    applyTheme(next);
-    setTheme(next);
-  };
 
   return (
-    <header className="sticky top-0 z-30 pt-safe">
-      <div className="glass flex items-center gap-3 px-4 py-3 dark:bg-ink/70">
+    <header className="sticky top-0 z-30 pt-safe lg:hidden">
+      <div className="glass flex items-center gap-3 px-4 py-3">
         {backTo && (
           <button
             onClick={() => navigate(backTo)}
-            className="btn-press -ml-1 rounded-full p-2 hover:bg-stone-200/60 dark:hover:bg-white/10"
+            className="btn-press -ml-1 rounded-full p-2 hover:bg-stone-200/60"
             aria-label="Back"
           >
             <svg
@@ -58,13 +50,6 @@ export function TopBar({ title = "Rice Pest Identifier", backTo = null }) {
               </motion.span>
             )}
           </AnimatePresence>
-          <button
-            onClick={toggleTheme}
-            className="btn-press rounded-full p-2 text-stone-500 hover:bg-stone-200/60 dark:text-stone-400 dark:hover:bg-white/10"
-            aria-label="Toggle dark mode"
-          >
-            {theme === "dark" ? <Sun className="h-4.5 w-4.5" /> : <Moon className="h-4.5 w-4.5" />}
-          </button>
         </div>
       </div>
     </header>
@@ -107,7 +92,7 @@ export function InstallPrompt() {
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold">Install RicePest</p>
-        <p className="text-xs text-stone-500 dark:text-stone-400">
+        <p className="text-xs text-stone-500">
           Works offline, straight from your home screen.
         </p>
       </div>
@@ -122,7 +107,7 @@ export function InstallPrompt() {
           localStorage.setItem("ricepest.installDismissed", "1");
           setDismissed(true);
         }}
-        className="rounded-lg p-1.5 text-stone-400 hover:bg-stone-200/60 dark:hover:bg-white/10"
+        className="rounded-lg p-1.5 text-stone-400 hover:bg-stone-200/60"
         aria-label="Dismiss"
       >
         <svg

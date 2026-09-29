@@ -27,7 +27,7 @@ function Kpi({ icon: Icon, label, value }) {
   return (
     <Card className="p-4">
       <div className="flex items-center gap-3">
-        <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand-100 text-brand-700 dark:bg-brand-600/20 dark:text-brand-300">
+        <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand-100 text-brand-700">
           <Icon className="h-5 w-5" />
         </div>
         <div>
@@ -185,7 +185,7 @@ export function AdminDashboardPage() {
           <h3 className="flex items-center gap-2 font-display font-bold">
             <Gauge className="h-4 w-4 text-brand-600" /> Avg confidence
           </h3>
-          <p className="mt-3 font-display text-4xl font-bold text-brand-700 dark:text-brand-300">
+          <p className="mt-3 font-display text-4xl font-bold text-brand-700">
             {avg != null ? formatPercent(avg) : "—"}
           </p>
           <h3 className="mt-6 font-display font-bold">Recent scans</h3>

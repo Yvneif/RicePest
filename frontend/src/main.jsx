@@ -13,11 +13,9 @@ import "./styles/index.css";
 
 import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
-import { applyTheme, getStoredTheme } from "./lib/device";
 import { registerSW } from "virtual:pwa-register";
 
 registerSW({ immediate: true });
-applyTheme(getStoredTheme());
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

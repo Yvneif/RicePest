@@ -1,7 +1,6 @@
-/** Small helpers for device identity, theme, and formatting. */
+/** Small helpers for device identity and formatting. */
 
 const DEVICE_KEY = "ricepest.deviceId";
-const THEME_KEY = "ricepest.theme";
 
 export function getDeviceId() {
   let id = localStorage.getItem(DEVICE_KEY);
@@ -10,17 +9,6 @@ export function getDeviceId() {
     localStorage.setItem(DEVICE_KEY, id);
   }
   return id;
-}
-
-export function getStoredTheme() {
-  const stored = localStorage.getItem(THEME_KEY);
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-export function applyTheme(theme) {
-  document.documentElement.classList.toggle("dark", theme === "dark");
-  localStorage.setItem(THEME_KEY, theme);
 }
 
 export function formatPercent(value) {

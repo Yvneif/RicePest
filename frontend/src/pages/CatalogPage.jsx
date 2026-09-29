@@ -34,9 +34,9 @@ export function CatalogPage() {
   const openItem = items.find((i) => i.slug === openSlug);
 
   return (
-    <div className="pb-32">
+    <div className="pb-32 lg:pb-10">
       <TopBar title="Pest Library" />
-      <div className="mx-auto max-w-md px-4">
+      <div className="mx-auto w-full max-w-md px-4 lg:max-w-6xl lg:px-8">
         <div className="glass mt-4 flex items-center gap-2 rounded-2xl px-4 py-3">
           <Search className="h-4.5 w-4.5 text-stone-400" />
           <input
@@ -76,7 +76,7 @@ export function CatalogPage() {
           </div>
         )}
 
-        <Stagger className="mt-4 grid gap-3">
+        <Stagger className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((item) => (
             <motion.button
               variants={staggerItem}
@@ -85,7 +85,7 @@ export function CatalogPage() {
               className="btn-press text-left"
             >
               <Card className="overflow-hidden hover:shadow-lift">
-                <div className="relative h-40 w-full overflow-hidden bg-brand-100 dark:bg-brand-900/40">
+                <div className="relative h-40 w-full overflow-hidden bg-brand-100">
                   {item.imageUrl ? (
                     <img
                       src={item.imageUrl}
@@ -109,7 +109,7 @@ export function CatalogPage() {
                   {item.scientificName && (
                     <p className="text-xs italic text-stone-400">{item.scientificName}</p>
                   )}
-                  <p className="mt-1.5 line-clamp-2 text-sm text-stone-500 dark:text-stone-400">
+                  <p className="mt-1.5 line-clamp-2 text-sm text-stone-500">
                     {item.description}
                   </p>
                 </div>
@@ -122,21 +122,21 @@ export function CatalogPage() {
       <AnimatePresence>
         {openItem && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-end justify-center bg-ink/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-end justify-center bg-ink/50 backdrop-blur-sm sm:items-center sm:p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setOpenSlug(null)}
           >
             <motion.div
-              className="max-h-[85vh] w-full max-w-md overflow-y-auto rounded-t-[2rem] bg-paper p-6 pb-10 dark:bg-stone-900"
+              className="max-h-[85vh] w-full max-w-md overflow-y-auto rounded-t-[2rem] bg-paper p-6 pb-10 sm:max-w-2xl sm:rounded-[2rem]"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", stiffness: 320, damping: 32 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-stone-300 dark:bg-white/20" />
+              <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-stone-300" />
               {openItem.imageUrl && (
                 <img
                   src={openItem.imageUrl}
@@ -155,15 +155,15 @@ export function CatalogPage() {
                   {openItem.status}
                 </Chip>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-stone-600 dark:text-stone-300">
+              <p className="mt-3 text-sm leading-relaxed text-stone-600">
                 {openItem.description}
               </p>
               {openItem.damageSigns && (
-                <div className="mt-4 rounded-2xl bg-gold-400/10 p-4 dark:bg-gold-400/5">
-                  <p className="text-xs font-bold uppercase tracking-wide text-gold-600 dark:text-gold-400">
+                <div className="mt-4 rounded-2xl bg-gold-400/10 p-4">
+                  <p className="text-xs font-bold uppercase tracking-wide text-gold-600">
                     Damage signs
                   </p>
-                  <p className="mt-1 text-sm text-stone-600 dark:text-stone-300">
+                  <p className="mt-1 text-sm text-stone-600">
                     {openItem.damageSigns}
                   </p>
                 </div>

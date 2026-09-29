@@ -10,10 +10,10 @@ export function Card({ className = "", children, ...props }) {
 
 export function Chip({ tone = "brand", className = "", children }) {
   const tones = {
-    brand: "bg-brand-100 text-brand-800 dark:bg-brand-600/20 dark:text-brand-200",
-    gold: "bg-gold-400/20 text-gold-600 dark:text-gold-400",
-    neutral: "bg-stone-200/70 text-stone-600 dark:bg-white/10 dark:text-stone-300",
-    red: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300",
+    brand: "bg-brand-100 text-brand-800",
+    gold: "bg-gold-400/20 text-gold-600",
+    neutral: "bg-stone-200/70 text-stone-600",
+    red: "bg-red-100 text-red-700",
   };
   return (
     <span
@@ -26,7 +26,7 @@ export function Chip({ tone = "brand", className = "", children }) {
 
 export function Skeleton({ className = "" }) {
   return (
-    <div className={`animate-pulse rounded-2xl bg-stone-200/80 dark:bg-white/10 ${className}`} />
+    <div className={`animate-pulse rounded-2xl bg-stone-200/80 ${className}`} />
   );
 }
 
@@ -43,13 +43,13 @@ export function EmptyState({ icon: Icon, title, subtitle, action }) {
   return (
     <Card className="flex flex-col items-center gap-3 px-8 py-14 text-center">
       {Icon && (
-        <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-100 text-brand-700 dark:bg-brand-600/20 dark:text-brand-300">
+        <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-100 text-brand-700">
           <Icon className="h-7 w-7" />
         </div>
       )}
       <h3 className="font-display text-lg font-semibold">{title}</h3>
       {subtitle && (
-        <p className="max-w-xs text-sm text-stone-500 dark:text-stone-400">{subtitle}</p>
+        <p className="max-w-xs text-sm text-stone-500">{subtitle}</p>
       )}
       {action}
     </Card>
@@ -70,7 +70,7 @@ export function ConfidenceRing({ value = 0, size = 148, label }) {
           r={radius}
           fill="none"
           strokeWidth={stroke}
-          className="stroke-stone-200 dark:stroke-white/10"
+          className="stroke-stone-200"
         />
         <motion.circle
           cx={size / 2}
@@ -79,7 +79,7 @@ export function ConfidenceRing({ value = 0, size = 148, label }) {
           fill="none"
           strokeWidth={stroke}
           strokeLinecap="round"
-          className="stroke-brand-600 dark:stroke-brand-400"
+          className="stroke-brand-600"
           strokeDasharray={circumference}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: circumference * (1 - value) }}
@@ -96,7 +96,7 @@ export function ConfidenceRing({ value = 0, size = 148, label }) {
           >
             {(value * 100).toFixed(1)}%
           </motion.div>
-          {label && <div className="text-xs text-stone-500 dark:text-stone-400">{label}</div>}
+          {label && <div className="text-xs text-stone-500">{label}</div>}
         </div>
       </div>
     </div>

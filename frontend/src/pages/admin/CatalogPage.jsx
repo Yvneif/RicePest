@@ -100,7 +100,7 @@ export function AdminCatalogPage() {
   return (
     <AdminLayout title="Catalog manager">
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm text-stone-500 dark:text-stone-400">{items.length} items</p>
+        <p className="text-sm text-stone-500">{items.length} items</p>
         <Button size="sm" onClick={openCreate}>
           <Plus className="h-4 w-4" /> Add item
         </Button>
@@ -119,7 +119,7 @@ export function AdminCatalogPage() {
                 className="h-16 w-16 shrink-0 rounded-2xl object-cover"
               />
             ) : (
-              <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-stone-200 dark:bg-white/10">
+              <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-stone-200">
                 <ImagePlus className="h-5 w-5 text-stone-400" />
               </div>
             )}
@@ -135,14 +135,14 @@ export function AdminCatalogPage() {
             <div className="flex shrink-0 flex-col gap-1.5">
               <button
                 onClick={() => openEdit(item)}
-                className="btn-press rounded-xl p-2 text-stone-400 hover:bg-stone-200/60 dark:hover:bg-white/10"
+                className="btn-press rounded-xl p-2 text-stone-400 hover:bg-stone-200/60"
                 aria-label="Edit"
               >
                 <Pencil className="h-4 w-4" />
               </button>
               <button
                 onClick={() => remove(item)}
-                className="btn-press rounded-xl p-2 text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10"
+                className="btn-press rounded-xl p-2 text-red-400 hover:bg-red-50"
                 aria-label="Delete"
               >
                 <Trash2 className="h-4 w-4" />
@@ -162,7 +162,7 @@ export function AdminCatalogPage() {
               <button
                 onClick={() => setShowForm(false)}
                 aria-label="Close"
-                className="rounded-lg p-1.5 hover:bg-stone-100 dark:hover:bg-white/10"
+                className="rounded-lg p-1.5 hover:bg-stone-100"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -204,14 +204,14 @@ export function AdminCatalogPage() {
                       rows={3}
                       value={form[key]}
                       onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                      className="w-full rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600 dark:border-white/15"
+                      className="w-full rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600"
                     />
                   ) : (
                     <input
                       type={type}
                       value={form[key]}
                       onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                      className="w-full rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600 dark:border-white/15"
+                      className="w-full rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600"
                     />
                   )}
                 </label>
@@ -221,7 +221,7 @@ export function AdminCatalogPage() {
                 <select
                   value={form.status}
                   onChange={(e) => setForm({ ...form, status: e.target.value })}
-                  className="w-full rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600 dark:border-white/15 dark:bg-stone-900"
+                  className="w-full rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600"
                 >
                   <option value="available">available</option>
                   <option value="unavailable">unavailable</option>

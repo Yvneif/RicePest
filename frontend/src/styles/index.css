@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: "Outfit", "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -68,16 +66,16 @@ html {
 }
 
 body {
-  @apply bg-paper font-sans text-stone-800 antialiased dark:bg-ink dark:text-stone-200;
+  @apply bg-paper font-sans text-stone-800 antialiased;
   overscroll-behavior-y: none;
 }
 
 @utility glass {
-  @apply border border-white/40 bg-white/70 backdrop-blur-xl dark:border-white/10 dark:bg-white/5;
+  @apply border border-white/40 bg-white/70 backdrop-blur-xl;
 }
 
 @utility card-base {
-  @apply rounded-3xl bg-white shadow-soft dark:bg-stone-900 dark:shadow-none dark:ring-1 dark:ring-white/10;
+  @apply rounded-3xl bg-white shadow-soft;
 }
 
 @utility btn-press {

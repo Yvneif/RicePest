@@ -57,7 +57,7 @@ export function AdminUsersPage() {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
             autoComplete="off"
-            className="rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600 dark:border-white/15"
+            className="rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600"
           />
           <input
             type="password"
@@ -65,7 +65,7 @@ export function AdminUsersPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password (min 8 chars)"
             autoComplete="new-password"
-            className="rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600 dark:border-white/15"
+            className="rounded-xl border border-stone-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-brand-600"
           />
           <Button type="submit" disabled={busy}>
             {busy ? "Creating…" : "Create"}
@@ -79,7 +79,7 @@ export function AdminUsersPage() {
       <div className="grid gap-3">
         {users.map((u) => (
           <Card key={u.id} className="flex items-center gap-3 p-4">
-            <div className="grid h-10 w-10 place-items-center rounded-full bg-brand-100 font-display font-bold text-brand-800 dark:bg-brand-600/20 dark:text-brand-200">
+            <div className="grid h-10 w-10 place-items-center rounded-full bg-brand-100 font-display font-bold text-brand-800">
               {u.username.slice(0, 1).toUpperCase()}
             </div>
             <div className="min-w-0 flex-1">
@@ -93,7 +93,7 @@ export function AdminUsersPage() {
             ) : (
               <button
                 onClick={() => remove(u)}
-                className="btn-press rounded-xl p-2 text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10"
+                className="btn-press rounded-xl p-2 text-red-400 hover:bg-red-50"
                 aria-label={`Delete ${u.username}`}
               >
                 <Trash2 className="h-4 w-4" />

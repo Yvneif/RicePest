@@ -10,11 +10,11 @@ const TABS = [
   { to: "/history", label: "History", icon: History },
 ];
 
-/** App-style bottom tab bar for phones; a floating pill on desktop. */
+/** App-style bottom tab bar for phones; hidden on desktop (DesktopNav takes over). */
 export function BottomNav() {
   const location = useLocation();
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 px-3 pb-safe">
+    <nav className="fixed inset-x-0 bottom-0 z-40 px-3 pb-safe lg:hidden">
       <div className="glass mx-auto mb-3 flex max-w-md items-center justify-between rounded-3xl px-2 py-1.5 shadow-lift">
         {TABS.map(({ to, label, icon: Icon, exact }) => {
           const active = exact ? location.pathname === to : location.pathname.startsWith(to);
@@ -27,18 +27,16 @@ export function BottomNav() {
               {active && (
                 <motion.span
                   layoutId="tab-pill"
-                  className="absolute inset-0 rounded-2xl bg-brand-600/10 dark:bg-brand-400/15"
+                  className="absolute inset-0 rounded-2xl bg-brand-600/10"
                   transition={{ type: "spring", stiffness: 400, damping: 32 }}
                 />
               )}
               <Icon
-                className={`relative h-5 w-5 ${active ? "text-brand-700 dark:text-brand-300" : "text-stone-400 dark:text-stone-500"}`}
+                className={`relative h-5 w-5 ${active ? "text-brand-700" : "text-stone-400"}`}
               />
               <span
                 className={`relative text-[10px] font-semibold ${
-                  active
-                    ? "text-brand-700 dark:text-brand-300"
-                    : "text-stone-400 dark:text-stone-500"
+                  active ? "text-brand-700" : "text-stone-400"
                 }`}
               >
                 {label}
